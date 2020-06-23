@@ -13,28 +13,34 @@ def position_taken(board, index)
 
 end
 
+# def won?(board)
+# winner = []
+# empty_board = board.all? {|x| x == " "}
+# WIN_COMBINATIONS.each do |sub_array|
+#     if empty_board || full?(board)
+#       return false
+#     elsif board[sub_array[0]] == board[sub_array[1]] && board[sub_array[2]] == board[sub_array[1]] && position_taken(board, sub_array[0])
+#       # sub_array.all? { |value| board[value] =="X" } || sub_array.all? { |value| board[value] =="O" }
+#     return sub_array
+#     end
+#
+#   end
+# end
 def won?(board)
-winner = []
-empty_board = board.all? {|x| x == " "}
-WIN_COMBINATIONS.each do |sub_array|
-    if empty_board || full?(board)
-      return false
-    elsif board[sub_array[0]] == board[sub_array[1]] && board[sub_array[2]] == board[sub_array[1]] && position_taken(board, sub_array[0])
-      # sub_array.all? { |value| board[value] =="X" } || sub_array.all? { |value| board[value] =="O" }
-    return sub_array
-    end
+  WIN_COMBINATIONS.detect do |sub_array|
+    board[sub_array[0]] == board[sub_array[1]] &&
+    board[sub_array[2]] == board[sub_array[1]] &&
+    position_taken(board, sub_array[0])
 
   end
 end
 
 def full?(board)
   !board.any? { |x| x == " " }
-  end
+end
 
 def draw?(board)
-  if !won?(board) && full?(board)
-    return true
-  end
+  !won?(board) && full?(board)
 end
 
 def over?(board)
