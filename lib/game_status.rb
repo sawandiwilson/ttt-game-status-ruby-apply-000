@@ -1,3 +1,4 @@
+require "pry"
 WIN_COMBINATIONS = [[0,1,2],
   [3,4,5],
   [6,7,8],
@@ -7,17 +8,22 @@ WIN_COMBINATIONS = [[0,1,2],
   [0,4,8],
   [2,4,6]]
 
+def position_taken(board, index)
+  board[index] != " "
+
+end
+
 def won?(board)
 winner = []
 empty_board = board.all? {|x| x == " "}
 WIN_COMBINATIONS.each do |sub_array|
     if empty_board || full?(board)
       return false
-    elsif sub_array.all? { |value| board[value] =="X" } || sub_array.all? { |value| board[value] =="O" }
-      winner = sub_array
-      winner
+    elsif board[sub_array[0]] == board[sub_array[1]] && board[sub_array[2]] == board[sub_array[1]] && position_taken(board, sub_array[0])
+      # sub_array.all? { |value| board[value] =="X" } || sub_array.all? { |value| board[value] =="O" }
+    return sub_array
     end
-board = ["X", "X", "X", "O", " ", "O", "O", " ", " "]
+
   end
 end
 
@@ -28,8 +34,6 @@ def full?(board)
 def draw?(board)
   if !won?(board) && full?(board)
     return true
-  elsif !won?(board) && !full?(board) || !won?(board)
-  return false
   end
 end
 
