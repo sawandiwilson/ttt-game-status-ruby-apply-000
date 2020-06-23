@@ -37,11 +37,10 @@ end
 
 def full?(board)
   !board.any? { |x| x == " " }
-  end
+end
 
-  def draw?(board)
-    !won?(board) && full?(board)
-  end
+def draw?(board)
+  !won?(board) && full?(board)
 end
 
 def over?(board)
